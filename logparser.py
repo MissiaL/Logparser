@@ -50,8 +50,8 @@ if args.string is not None:
     string = args.string[0]
     if string.endswith('.srh'):
         srh = os.path.realpath(string)
-        search_string = open(srh,'r').read()
-        search_string.replace('(', '\(').replace(')', '\)').replace('[', '\[').replace(']', '\]').replace('*', '\*')\
+        s = open(srh,'r').read()
+        search_string = s.replace('(', '\(').replace(')', '\)').replace('[', '\[').replace(']', '\]').replace('*', '\*')\
             .replace('+', '\+').replace('{', '\{').replace('}', '\}')
     else:
         search_string = string.replace('(', '\(').replace(')', '\)').replace('[', '\[').replace(']', '\]')\
@@ -173,13 +173,13 @@ def create_log_search():
         print('Количество найденных строк: {0}'.format(len(errors)))
         search_errors = []
         if errors:
-            search_errors.append('=' * 50 + log + '=' * 50 + '\n')
+            search_errors.append('\n\n\n\n'+'=' * 50 + log + '=' * 50 + '\n')
             print('Записываем результаты поиска в лог.....')
             for error in errors:
                 search_errors.append('-' * 50 + '\n')
                 search_errors.append(error)
-
-        with open('result_SEARCH.txt', 'a+') as fi:
+        search_file = 'result_{0}.txt'.format(s)
+        with open(search_file, 'a+') as fi:
             for text in search_errors:
                 fi.write(text)
 
